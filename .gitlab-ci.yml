@@ -8,8 +8,8 @@ stages:
   - release
 
 variables:
-  CONTAINER_TEST_IMAGE: registry.obvsg.at/primo/frontend/primo-explore-devenv:$CI_COMMIT_REF_NAME
-  CONTAINER_RELEASE_IMAGE: registry.obvsg.at/primo/frontend/primo-explore-devenv:latest
+  CONTAINER_TEST_IMAGE: registry.obvsg.at/primo/frontend/primo-explore-devenv-docker:$CI_COMMIT_REF_NAME
+  CONTAINER_RELEASE_IMAGE: registry.obvsg.at/primo/frontend/primo-explore-devenv-docker:latest
 
 before_script:
   - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.obvsg.at
@@ -17,7 +17,7 @@ before_script:
 build-image:
   stage: build
   script:
-    - docker build --pull --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` --build-arg VCS_REF=`git rev-parse --short HEAD` --build-arg VERSION=`cat VERSION` -t $CONTAINER_TEST_IMAGE .
+    - docker build --pull --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` --build-arg VCS_REF=$CI_COMMIT_SHA --build-arg VERSION=`cat VERSION` -t $CONTAINER_TEST_IMAGE .
     - docker push $CONTAINER_TEST_IMAGE
   tags:
     - docker-build
