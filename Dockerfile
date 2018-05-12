@@ -18,6 +18,8 @@ ENV PROXY "https://search-test.obvsg.at"
 ENV VIEW TEST
 ENV GULP_OPTIONS ""
 
+RUN npm install -g gulp
+USER node
 WORKDIR /home/node
 # RUN git clone https://github.com/ExLibrisGroup/primo-explore-devenv.git
 RUN git clone https://github.com/uleodolter/primo-explore-devenv.git
@@ -26,7 +28,6 @@ RUN git clone https://github.com/ExLibrisGroup/primo-explore-package.git
 RUN mv primo-explore-package/VIEW_CODE ./TEST
 RUN rm -rf primo-explore-package
 WORKDIR /home/node/primo-explore-devenv
-RUN npm install -g gulp
 RUN npm install
 RUN npm rebuild node-sass
 
