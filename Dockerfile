@@ -16,6 +16,7 @@ org.label-schema.schema-version="1.0"
 ENV NPM_CONFIG_LOGLEVEL info
 ENV PROXY "https://search-test.obvsg.at"
 ENV VIEW TEST
+ENV GULP_OPTIONS ""
 
 WORKDIR /home/node
 # RUN git clone https://github.com/ExLibrisGroup/primo-explore-devenv.git
@@ -32,4 +33,4 @@ RUN npm rebuild node-sass
 EXPOSE 8003
 EXPOSE 3001
 
-CMD [ "/bin/bash", "-c", "gulp run --view $VIEW --proxy $PROXY" ]
+CMD [ "/bin/bash", "-c", "gulp run --view $VIEW --proxy $PROXY $GULP_OPTIONS" ]
