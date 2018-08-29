@@ -24,7 +24,7 @@ WORKDIR /home/node
 # RUN git clone https://github.com/ExLibrisGroup/primo-explore-devenv.git
 RUN git clone https://github.com/uleodolter/primo-explore-devenv.git \
  && git clone https://github.com/ExLibrisGroup/primo-explore-package.git \
- && primo-explore-package/VIEW_CODE ./primo-explore-devenv/primo-explore/custom/TEST \
+ && mv ./primo-explore-package/VIEW_CODE ./primo-explore-devenv/primo-explore/custom/TEST \
  && rm -rf primo-explore-package
 WORKDIR /home/node/primo-explore-devenv
 RUN npm install \
