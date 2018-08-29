@@ -22,14 +22,13 @@ RUN npm install -g gulp
 USER node
 WORKDIR /home/node
 # RUN git clone https://github.com/ExLibrisGroup/primo-explore-devenv.git
-RUN git clone https://github.com/uleodolter/primo-explore-devenv.git
-WORKDIR /home/node/primo-explore-devenv/primo-explore/custom
-RUN git clone https://github.com/ExLibrisGroup/primo-explore-package.git
-RUN mv primo-explore-package/VIEW_CODE ./TEST
-RUN rm -rf primo-explore-package
+RUN git clone https://github.com/uleodolter/primo-explore-devenv.git \
+ && git clone https://github.com/ExLibrisGroup/primo-explore-package.git \
+ && primo-explore-package/VIEW_CODE ./primo-explore-devenv/primo-explore/custom/TEST \
+ && rm -rf primo-explore-package
 WORKDIR /home/node/primo-explore-devenv
-RUN npm install
-RUN npm rebuild node-sass
+RUN npm install \
+ && npm rebuild node-sass
 
 EXPOSE 8003
 EXPOSE 3001
