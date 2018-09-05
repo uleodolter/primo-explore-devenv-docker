@@ -14,8 +14,8 @@ org.label-schema.version=$VERSION \
 org.label-schema.schema-version="1.0"
 
 ENV NPM_CONFIG_LOGLEVEL info
-ENV PROXY "https://search-test.obvsg.at"
-ENV VIEW TEST
+ENV PROXY "http://search.obvsg.at:80"
+ENV VIEW OBV
 ENV GULP_OPTIONS ""
 
 RUN npm install -g gulp
