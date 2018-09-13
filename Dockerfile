@@ -1,9 +1,4 @@
-FROM node:boron
-
-# Update and install
-RUN apt-get update && apt-get install -y \
-    su-exec \
- && rm -rf /var/lib/apt/lists/*
+FROM node:boron-alpine
 
 # Build-time metadata as defined at http://label-schema.org
 ARG BUILD_DATE
@@ -23,6 +18,22 @@ ENV PROXY "http://search.obvsg.at:80"
 ENV VIEW TML
 ENV GULP_OPTIONS ""
 
+# Update and install tools
+RUN apk upgrade --update  \
+ && apk add \
+    libc6-compat \
+    bash \
+    vim \
+    git \
+    su-exec \
+    gzip \
+    tar \
+    curl \
+ && rm -fr /var/cache/apk/* \
+ && rm -fr /tmp/* \
+ && rm -rf /var/log/*
+
+# Install primo-exlpore-devenv
 RUN npm install -g gulp
 WORKDIR /app
 # RUN git clone https://github.com/ExLibrisGroup/primo-explore-devenv.git
@@ -31,8 +42,7 @@ RUN git clone https://github.com/uleodolter/primo-explore-devenv.git \
  && mv ./primo-explore-package/VIEW_CODE ./primo-explore-devenv/primo-explore/custom/TML \
  && rm -rf primo-explore-package
 WORKDIR /app/primo-explore-devenv
-RUN npm install \
- && npm rebuild node-sass
+RUN npm install
 
 EXPOSE 8003
 EXPOSE 3001
