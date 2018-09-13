@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-DEFAULT_USER=ulrich
+DEFAULT_USER=node
 DEFAULT_UID=$(id -u $DEFAULT_USER)
 DEFAULT_GID=$(id -g $DEFAULT_USER)
 
