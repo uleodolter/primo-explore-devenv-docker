@@ -1,5 +1,10 @@
 FROM node:boron
 
+# Update and install
+RUN apt-get update && apt-get install -y \
+    su-exec \
+ && rm -rf /var/lib/apt/lists/*
+
 # Build-time metadata as defined at http://label-schema.org
 ARG BUILD_DATE
 ARG VCS_REF
@@ -15,22 +20,23 @@ org.label-schema.schema-version="1.0"
 
 ENV NPM_CONFIG_LOGLEVEL info
 ENV PROXY "http://search.obvsg.at:80"
-ENV VIEW OBV
+ENV VIEW TML
 ENV GULP_OPTIONS ""
 
 RUN npm install -g gulp
-USER node
-WORKDIR /home/node
+WORKDIR /app
 # RUN git clone https://github.com/ExLibrisGroup/primo-explore-devenv.git
 RUN git clone https://github.com/uleodolter/primo-explore-devenv.git \
  && git clone https://github.com/ExLibrisGroup/primo-explore-package.git \
- && mv ./primo-explore-package/VIEW_CODE ./primo-explore-devenv/primo-explore/custom/TEST \
+ && mv ./primo-explore-package/VIEW_CODE ./primo-explore-devenv/primo-explore/custom/TML \
  && rm -rf primo-explore-package
-WORKDIR /home/node/primo-explore-devenv
+WORKDIR /app/primo-explore-devenv
 RUN npm install \
  && npm rebuild node-sass
 
 EXPOSE 8003
 EXPOSE 3001
 
+COPY docker-entrypoint.sh /usr/local/bin
+ENTRYPOINT [ "docker-entrypoint.sh" ]
 CMD [ "/bin/bash", "-c", "gulp run --view $VIEW --proxy $PROXY $GULP_OPTIONS" ]
