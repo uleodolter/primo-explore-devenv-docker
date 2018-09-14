@@ -17,4 +17,8 @@ if [[ "$DOCKER_UID" != "$DEFAULT_UID" ]]; then
     adduser -G $DOCKER_GROUP -s /bin/bash -u $DOCKER_UID -g "Docker User" -D docker
 fi
 
+# allow creation of files and directories
+chgrp . $DOCKER_GROUP
+chmod 775 .
+
 exec su-exec $DOCKER_UID:$DOCKER_GID "$@"
