@@ -1,10 +1,9 @@
-version: '2'
+version: '3'
 
 services:
 
-  server:
+  devenv:
     image: registry.obvsg.at/primo/frontend/primo-explore-devenv-docker
-    network_mode: host
     environment:
       PROXY_SERVER: https://search-test.obvsg.at:443 # replace with url to your primo instance
       VIEW: OBV # replace with name of your view as it appears below in "volumes"
@@ -13,6 +12,6 @@ services:
       - 8003:8003 # used to view the application
       - 3001:3001 # used to view the browsersync dashboard
     volumes:
-      - ./:/home/node/primo-explore-devenv/packages # used to access generated package .zip files
-      - /home/ulrich/Projects/primo/primo-explore/primo-explore-obv:/home/node/primo-explore-devenv/primo-explore/custom/OBV # replace with path to your view folder
-      - /home/ulrich/Projects/primo/primo-explore/primo-explore-obv-central:/home/node/primo-explore-devenv/primo-explore/custom/CENTRAL_PACKAGE # optional - replace with path to your central package folder
+      - ./:/app/primo-explore-devenv/packages # used to access generated package .zip files
+      - /home/primo/primo-explore-obv:/app/primo-explore-devenv/primo-explore/custom/OBV # replace with path to your view folder
+      - /home/primo/primo-explore-obv-central:/app/primo-explore-devenv/primo-explore/custom/CENTRAL_PACKAGE # optional - replace with path to your central package folder
