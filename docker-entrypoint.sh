@@ -12,10 +12,13 @@ if [[ "$DOCKER_GID" != "$DEFAULT_GID" ]]; then
     addgroup -g $DOCKER_GID docker
 fi
 
+DOCKER_GROUP=$(getent group $DOCKER_GID | cut -d: -f1)
+
 if [[ "$DOCKER_UID" != "$DEFAULT_UID" ]]; then
-    DOCKER_GROUP=$(getent group $DOCKER_GID | cut -d: -f1)
     adduser -G $DOCKER_GROUP -s /bin/bash -u $DOCKER_UID -g "Docker User" -D docker
 fi
+
+DOCKER_USER=$(getent passwd $DOCKER_UID | cut -d: -f1)
 
 # allow creation of files and directories
 chgrp $DOCKER_GROUP .
