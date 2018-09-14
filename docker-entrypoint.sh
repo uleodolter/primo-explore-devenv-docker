@@ -21,7 +21,7 @@ fi
 DOCKER_USER=$(getent passwd $DOCKER_UID | cut -d: -f1)
 
 # allow creation of files and directories
-chgrp $DOCKER_GROUP .
-chmod 775 .
+chgrp $DOCKER_GROUP . node_modules
+chmod 775 . node_modules
 
 exec su-exec $DOCKER_UID:$DOCKER_GID "$@"

@@ -42,7 +42,7 @@ RUN git clone https://github.com/uleodolter/primo-explore-devenv.git \
  && mv ./primo-explore-package/VIEW_CODE ./primo-explore-devenv/primo-explore/custom/TML \
  && rm -rf primo-explore-package
 WORKDIR /app/primo-explore-devenv
-RUN npm install
+RUN npm install && npm cache clean --force
 
 EXPOSE 8003
 EXPOSE 3001
