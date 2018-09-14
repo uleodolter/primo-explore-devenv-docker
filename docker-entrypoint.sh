@@ -18,7 +18,7 @@ if [[ "$DOCKER_UID" != "$DEFAULT_UID" ]]; then
 fi
 
 # allow creation of files and directories
-chgrp . $DOCKER_GROUP
+chgrp $DOCKER_GROUP .
 chmod 775 .
 
 exec su-exec $DOCKER_UID:$DOCKER_GID "$@"
