@@ -9,12 +9,18 @@ DOCKER_UID=${DOCKER_UID:-$DEFAULT_UID}
 DOCKER_GID=${DOCKER_GID:-$DEFAULT_GID}
 
 if [[ "$DOCKER_GID" != "$DEFAULT_GID" ]]; then
+    if getent group docker >/dev/null; then
+        delgroup docker
+    fi
     addgroup -g $DOCKER_GID docker
 fi
 
 DOCKER_GROUP=$(getent group $DOCKER_GID | cut -d: -f1)
 
 if [[ "$DOCKER_UID" != "$DEFAULT_UID" ]]; then
+    if getent passwd docker >/dev/null; then
+        deluser --remove-home docker
+    fi
     adduser -G $DOCKER_GROUP -s /bin/bash -u $DOCKER_UID -g "Docker User" -D docker
 fi
 
