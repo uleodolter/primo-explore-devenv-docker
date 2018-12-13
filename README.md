@@ -61,7 +61,7 @@ docker-compose restart
 first, make sure that the line:
 ```yml
 volumes:
-  - ./:/home/node/primo-explore-devenv/packages
+  - ./:/app/primo-explore-devenv/packages # used to access generated package .zip files
 ```
 appears in your `docker-compose.yml` file, so that packages will appear outside the container.
 
