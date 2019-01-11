@@ -1,8 +1,11 @@
-sut:
-  build: .
-  command: run_tests.sh
-  environment:
-    VIEW: TML
-    PROXY: "https://search-test.obvsg.at:443"
-    GULP_OPTIONS: "--browserify"
+version: '3'
 
+services:
+
+  sut:
+    build: .
+    command: gulp --tasks
+    environment:
+      VIEW: TML
+      PROXY: "https://search-test.obvsg.at:443"
+      GULP_OPTIONS: "--browserify"
