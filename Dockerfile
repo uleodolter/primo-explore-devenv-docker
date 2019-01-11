@@ -3,14 +3,15 @@ FROM node:boron-alpine
 # Build-time metadata as defined at http://label-schema.org
 ARG BUILD_DATE
 ARG VCS_REF
+ARG VCS_URL
 ARG VERSION
-LABEL org.label-schema.build-date=$BUILD_DATE \
+LABEL org.label-schema.build-date="$BUILD_DATE" \
 org.label-schema.name="primo-explore-devenv" \
 org.label-schema.description="Primo New UI Customization Docker Development Environment" \
-org.label-schema.vcs-ref=$VCS_REF \
-org.label-schema.vcs-url="https://gitlab.obvsg.at/Primo/Frontend/primo-explore-devenv-docker" \
+org.label-schema.vcs-ref="$VCS_REF" \
+org.label-schema.vcs-url="$VCS_URL" \
 org.label-schema.vendor="OBVSG" \
-org.label-schema.version=$VERSION \
+org.label-schema.version="$VERSION" \
 org.label-schema.schema-version="1.0"
 
 ENV NPM_CONFIG_LOGLEVEL info

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# https://docs.docker.com/docker-hub/builds/advanced/#custom-build-phase-hooks
+docker build \
+    --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"`
+    --build-arg VCS_REF=$SOURCE_COMMIT \
+    --build-arg VCS_URL="https://github.com/uleodolter/primo-explore-devenv-docker" \
+    --build-arg VERSION=`cat VERSION` \
+    -f $DOCKERFILE_PATH -t $IMAGE_NAME .
