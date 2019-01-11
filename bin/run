@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+set -e
+
+export DEVENV_UID=$(id -u)
+export DEVENV_GID=$(id -g)
+
+# adjust VIEW and PROXY for your needs
+VIEW=MY_VIEW
+PROXY="https://my.primo.example:443"
+GULP_OPTIONS="--browserify"
+
+if [ "$#" -ge "1" ]; then
+    TASK="$1"
+    shift
+    docker-compose run --rm devenv gulp $TASK --view $VIEW --proxy $PROXY $GULP_OPTIONS $*
+    exit 0
+fi
+
+if [ ! -f "css/app-colors.css" ] || [ "colors.json" -nt "css/app-colors.css" ]; then
+    docker-compose run --rm devenv gulp app-css --view $VIEW --proxy $PROXY $GULP_OPTIONS
+    exit 0
+fi
+
+docker-compose up --remove-orphans
