@@ -26,6 +26,7 @@ RUN apk upgrade --update  \
     bash \
     vim \
     git \
+    patch \
     su-exec \
     gzip \
     tar \
