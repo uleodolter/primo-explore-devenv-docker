@@ -32,4 +32,12 @@ DEVENV_USER=$(getent passwd $DEVENV_UID | cut -d: -f1)
 chgrp $DEVENV_GROUP . node_modules
 chmod 775 . node_modules
 
-exec su-exec $DEVENV_UID:$DEVENV_GID "$@"
+# Apline
+if which su-exec >/dev/null; then
+    exec su-exec $DEVENV_UID:$DEVENV_GID "$@"
+fi
+
+# Debian
+if which gosu >/dev/null; then
+    exec gosu "$DEVENV_USER" "$@"
+fi

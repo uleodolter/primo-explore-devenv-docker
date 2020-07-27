@@ -1,4 +1,4 @@
-FROM node:boron-alpine
+FROM node:10-buster-slim
 
 # Build-time metadata as defined at http://label-schema.org
 ARG BUILD_DATE
@@ -15,25 +15,22 @@ org.label-schema.version="$VERSION" \
 org.label-schema.schema-version="1.0"
 
 ENV NPM_CONFIG_LOGLEVEL info
-ENV PROXY "http://search.obvsg.at:80"
+ENV PROXY "https://search.obvsg.at:443"
 ENV VIEW TML
 ENV GULP_OPTIONS ""
 
 # Update and install tools
-RUN apk upgrade --update  \
- && apk add \
-    libc6-compat \
+RUN apt-get update \
+ && apt-get install -y \
+    gosu \
     bash \
-    vim \
+    vim-tiny \
     git \
     patch \
-    su-exec \
     gzip \
     tar \
     curl \
- && rm -fr /var/cache/apk/* \
- && rm -fr /tmp/* \
- && rm -rf /var/log/*
+ && rm -rf /var/lib/apt/lists/*
 
 # Install primo-exlpore-devenv
 RUN npm install -g gulp
