@@ -23,7 +23,7 @@ fi
 DEVENV_GROUP=$(getent group $DEVENV_GID | cut -d: -f1)
 
 if [[ "$DEVENV_UID" != "$DEFAULT_UID" ]]; then
-    useradd -D -G $DEVENV_GROUP -s /bin/bash -u $DEVENV_UID -c "Devenv User" $DEVENV_USER
+    useradd -G $DEVENV_GROUP -s /bin/bash -u $DEVENV_UID -c "Devenv User" $DEVENV_USER
 fi
 
 DEVENV_USER=$(getent passwd $DEVENV_UID | cut -d: -f1)
