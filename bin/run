@@ -21,4 +21,4 @@ if [ ! -f "css/app-colors.css" ] || [ "colors.json" -nt "css/app-colors.css" ]; 
     exit 0
 fi
 
-docker-compose up --remove-orphans
+docker-compose up --remove-orphans -d
