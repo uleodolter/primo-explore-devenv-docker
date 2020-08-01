@@ -23,7 +23,9 @@ fi
 DEVENV_GROUP=$(getent group $DEVENV_GID | cut -d: -f1)
 
 if [[ "$DEVENV_UID" != "$DEFAULT_UID" ]]; then
-    adduser -G $DEVENV_GROUP -s /bin/bash -u $DEVENV_UID -g "Devenv User" -D $DEVENV_USER
+# Alpine
+#   adduser -G $DEVENV_GROUP -s /bin/bash -u $DEVENV_UID -g "Devenv User" -D $DEVENV_USER
+    useradd -G $DEVENV_GROUP -s /bin/bash -u $DEVENV_UID -c "Devenv User" -D $DEVENV_USER
 fi
 
 DEVENV_USER=$(getent passwd $DEVENV_UID | cut -d: -f1)
