@@ -33,7 +33,7 @@ RUN apt-get update \
  && rm -rf /var/lib/apt/lists/*
 
 # Install primo-exlpore-devenv
-RUN npm install -g gulp
+RUN npm install -g gulp csslint eslint@7 eslint-plugin-angular
 WORKDIR /app
 # RUN git clone https://github.com/ExLibrisGroup/primo-explore-devenv.git
 RUN git clone https://github.com/uleodolter/primo-explore-devenv.git \
