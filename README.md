@@ -1,6 +1,6 @@
 # Primo New UI Customization Docker Development Environment
 
-Run the https://github.com/ExLibrisGroup/primo-explore-devenv
+Run the https://github.com/uleodolter/primo-explore-devenv
 
 ## Downloading:
 
@@ -8,7 +8,7 @@ ensure the latest versions of `docker` and `docker-compose` are installed.
 
 download the project with:
 ```sh
-git clone namespace/project
+git clone https://github.com/uleodolter/primo-explore-devenv-docker.git
 ```
 
 `docker-compose.example.yml` contains an example configuration for the development environment. you will need to rename it `docker-compose.yml` and make some changes (detailed below) to start working.
@@ -22,12 +22,21 @@ you need a view code package to use the development environment. you can provide
 to add a view to the development environment, ensure that the line:
 ```yml
 volumes:
-  - /path/to/my/view/code/:/app/primo-explore-devenv/custom/NAME_OF_VIEW
+  - ./:/app/primo-explore-devenv/custom/NAME_OF_VIEW
 ```
 appears in your `docker-compose.yml`, where the path on the left is the absolute path to your view code folder.
 
 - to select a view, edit the `VIEW` property in `docker-compose.yml` to match the name you provided in the `volumes` stanza, e.g. `NAME_OF_VIEW`.
 - to select a proxy server to view live primo results, edit the `PROXY` property in `docker-compose.yml`.
+
+you can create an `.env` which is read by docker-compose, please adjust:
+
+```
+VIEW=NAME_OF_VIEW
+PROXY=https://primo.domain.name:443
+GULP_OPTIONS=--browserify --useScss
+```
+
 
 to start developing, open a terminal in this directory and run:
 ```sh
@@ -43,11 +52,11 @@ docker-compose up
 first, ensure that the line:
 ```yml
 volumes:
-  - /path/to/my/other/view/:/app/primo-explore-devenv/custom/NAME_OF_OTHER_VIEW
+  - ./:/app/primo-explore-devenv/custom/NAME_OF_OTHER_VIEW
 ```
 appears in your `docker-compose.yml`, providing access to the new view.
 
-to change the currently displayed view, edit the `VIEW` property in `docker-compose.yml`, open a terminal in the project directory, and run:
+to change the currently displayed view, edit the `VIEW` property in `.env`, open a terminal in the project directory, and run:
 ```sh
 docker-compose restart
 ```

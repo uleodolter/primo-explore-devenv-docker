@@ -2,7 +2,7 @@ version: '3'
 
 services:
 
-  sut:
+  devenv:
     build: .
     command: gulp --tasks
     environment:
