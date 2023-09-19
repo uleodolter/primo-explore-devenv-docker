@@ -17,7 +17,9 @@ org.label-schema.schema-version="1.0"
 ENV NPM_CONFIG_LOGLEVEL info
 ENV PROXY "https://search.obvsg.at:443"
 ENV VIEW TML
-ENV GULP_OPTIONS ""
+ENV GULP_BROWSERIFY ""
+ENV GULP_USESCSS ""
+ENV GULP_VE ""
 
 # Update and install tools
 RUN apt-get update \
@@ -48,4 +50,4 @@ EXPOSE 3001
 
 COPY docker-entrypoint.sh /usr/local/bin
 ENTRYPOINT [ "docker-entrypoint.sh" ]
-CMD [ "/bin/bash", "-c", "gulp run --view $VIEW --proxy $PROXY ${GULP_OPTIONS}" ]
+CMD [ "/bin/bash", "-c", "gulp run --view $VIEW --proxy $PROXY $GULP_BROWSERIFY $GULP_USESCSS $GULP_VE" ]

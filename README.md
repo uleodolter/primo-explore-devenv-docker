@@ -34,7 +34,8 @@ you can create an `.env` which is read by docker-compose, please adjust:
 ```
 VIEW=NAME_OF_VIEW
 PROXY=https://primo.domain.name:443
-GULP_OPTIONS=--browserify --useScss
+GULP_BROWSERIFY=--browserify
+GULP_USESCSS=--useScss
 ```
 
 
