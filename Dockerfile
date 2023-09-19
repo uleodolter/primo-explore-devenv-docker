@@ -48,4 +48,4 @@ EXPOSE 3001
 
 COPY docker-entrypoint.sh /usr/local/bin
 ENTRYPOINT [ "docker-entrypoint.sh" ]
-CMD [ "/bin/bash", "-c", "gulp run --view $VIEW --proxy $PROXY ${GULP_OPTIONS//\"/}" ]
+CMD [ "/bin/bash", "-c", "gulp run --view $VIEW --proxy $PROXY ${GULP_OPTIONS}" ]
