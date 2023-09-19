@@ -32,7 +32,7 @@ DEVENV_USER=$(getent passwd $DEVENV_UID | cut -d: -f1)
 chgrp $DEVENV_GROUP . node_modules
 chmod 775 . node_modules
 
-# Apline
+# Alpine
 if which su-exec >/dev/null; then
     exec su-exec $DEVENV_UID:$DEVENV_GID "$@"
 fi
