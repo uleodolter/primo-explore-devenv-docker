@@ -1,4 +1,4 @@
-FROM node:16-buster-slim
+FROM node:20-bookworm
 
 # Build-time metadata as defined at http://label-schema.org
 ARG BUILD_DATE
@@ -14,12 +14,12 @@ org.label-schema.vendor="OBVSG" \
 org.label-schema.version="$VERSION" \
 org.label-schema.schema-version="1.0"
 
-ENV NPM_CONFIG_LOGLEVEL info
-ENV PROXY "https://search.obvsg.at:443"
-ENV VIEW TML
-ENV GULP_BROWSERIFY ""
-ENV GULP_USESCSS ""
-ENV GULP_VE ""
+ENV NPM_CONFIG_LOGLEVEL=info
+ENV PROXY="https://search.obvsg.at:443"
+ENV VIEW=TML
+ENV GULP_BROWSERIFY=""
+ENV GULP_USESCSS=""
+ENV GULP_VE=""
 
 # Update and install tools
 RUN apt-get update \
@@ -35,7 +35,7 @@ RUN apt-get update \
  && rm -rf /var/lib/apt/lists/*
 
 # Install primo-exlpore-devenv
-RUN npm install -g gulp csslint eslint@8
+RUN npm install -g gulp@4.0.2 csslint eslint@8
 WORKDIR /app
 # RUN git clone https://github.com/ExLibrisGroup/primo-explore-devenv.git
 RUN git clone https://github.com/uleodolter/primo-explore-devenv.git \
